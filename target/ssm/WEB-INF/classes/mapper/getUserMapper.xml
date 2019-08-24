@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lz.dao.LoginMapper">
+  <resultMap id="BaseResultMap" type="com.lz.entity.User">
+    <id column="USERID" jdbcType="VARCHAR" property="userid" />
+    <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+    <result column="ZIYID" jdbcType="VARCHAR" property="staffid" />
+  </resultMap>
+
+  <select id="getUser" parameterType="String" resultMap="BaseResultMap">
+      select USERID,PASSWORD,ZIYID from sx_tool_loginyz a where USERID = #{userid}
+  </select>
+
+</mapper>
