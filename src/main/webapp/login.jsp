@@ -28,7 +28,7 @@ function tijiao() {
     var a = document.getElementById("a").value;
     var b = document.getElementById("b").value;
     if(a == "" || b == ""){
-        alert("请输入！")
+        alert("请输入！！");
         return false;
     }else{
         return true;
