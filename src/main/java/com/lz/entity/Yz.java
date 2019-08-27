@@ -17,22 +17,40 @@ public class Yz {
     private String storname;
     private String staffname;
     private String opid;
-    private Timestamp createtime;
-    private Timestamp lastmodifytime;
+    private String createtime;
+    private String lastmodifytime;
+    private String custno;
+    private String custname;
 
-    public Timestamp getCreatetime() {
+    public String getCustno() {
+        return custno;
+    }
+
+    public void setCustno(String custno) {
+        this.custno = custno;
+    }
+
+    public String getCustname() {
+        return custname;
+    }
+
+    public void setCustname(String custname) {
+        this.custname = custname;
+    }
+
+    public String getCreatetime() {
         return createtime;
     }
 
-    public void setCreatetime(Timestamp createtime) {
+    public void setCreatetime(String createtime) {
         this.createtime = createtime;
     }
 
-    public Timestamp getLastmodifytime() {
+    public String getLastmodifytime() {
         return lastmodifytime;
     }
 
-    public void setLastmodifytime(Timestamp lastmodifytime) {
+    public void setLastmodifytime(String lastmodifytime) {
         this.lastmodifytime = lastmodifytime;
     }
 

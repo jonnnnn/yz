@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lz.dao.FpMapper">
+    <resultMap id="BaseResultMap" type="com.lz.entity.Fp">
+        <id column="PK" jdbcType="VARCHAR" property="pk"/>
+        <result column="custno" jdbcType="VARCHAR" property="custno"/>
+    </resultMap>
+
+    <select id="getFp" parameterType="Fp" resultMap="BaseResultMap">
+        select *
+        from tyerp.TB_GOS_SALEINVOICEAPPLYsum a
+        where a.OPID = #{opid}
+          and a.BILLSTATE = 1
+          and not exists(select b.RELATEDBILLID
+                         from tyerp.TB_GOS_FINANCE_SALEBILLNEWSUM b
+                         where b.branchid = a.branchid
+                           and a.billid = b.relatedbillid)
+          and a.billingdate > To_Date('2019-8-1', 'yyyy-mm-dd')
+    </select>
+
+</mapper>

@@ -4,8 +4,8 @@
   <resultMap id="BaseResultMap" type="com.lz.entity.Yz">
     <id column="PK" jdbcType="BIGINT" property="pk" />
     <result column="BRANCHID" jdbcType="VARCHAR" property="branchid" />
-    <result column="CREATETIME" jdbcType="TIMESTAMP" property="createtime" />
-    <result column="LASTMODIFYTIME" jdbcType="TIMESTAMP" property="lastmodifytime" />
+    <result column="CREATETIME" jdbcType="VARCHAR" property="createtime"/>
+    <result column="LASTMODIFYTIME" jdbcType="VARCHAR" property="lastmodifytime"/>
     <result column="NOTE" jdbcType="VARCHAR" property="note" />
     <result column="PRODNO" jdbcType="VARCHAR" property="prodno" />
     <result column="PRODNAME" jdbcType="VARCHAR" property="prodname" />
@@ -15,15 +15,17 @@
     <result column="STORNAME" jdbcType="VARCHAR" property="storname" />
     <result column="STAFFNAME" jdbcType="VARCHAR" property="staffname" />
     <result column="OPID" jdbcType="VARCHAR" property="opid" />
+    <result column="CUSTNAME" jdbcType="VARCHAR" property="custname"/>
+    <result column="CUSTNO" jdbcType="VARCHAR" property="custno"/>
   </resultMap>
 
 
   <select id="getByOpid" parameterType="String" resultMap="BaseResultMap">
      select pk,
-       BRANCHID,
-       CREATETIME,
-       LASTMODIFYTIME,
-       note,
+            BRANCHID,
+            CREATETIME,
+            LASTMODIFYTIME,
+            note,
        (select prodno
           from vw_common_prod b
          where b.prodid = a.prodid
@@ -32,12 +34,14 @@
           from vw_common_prod b
          where b.prodid = a.prodid
            and b.branchid = a.branchid) prodname,
-       LOTNO,
-       quantity,
-       billid,
+            LOTNO,
+            quantity,
+            billid,
 			 (select c.storename from TB_COMMON_STOREHOUSE c where c.storeid = a.storeid) storname,
        (select d.staffname from TB_SYS_STAFF d  where d.staffid = a.opid ) staffname,
-			 OPID
+            OPID,
+            CUSTNO,
+            CUSTNAME
   from TB_GOS_STOCK_STOCKPREEMPTION a
 	where OPID = #{opid} and BILLID like '%XSG草%'
   </select>

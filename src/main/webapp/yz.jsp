@@ -12,7 +12,7 @@
     <title>Title</title>
 </head>
 <body>
-<h2>温馨提示：在删除前请先退出ERP销售开票单界面！</h2>
+<h2>提示：在删除前请先退出ERP销售开票单界面！</h2>
 <table cellspacing="0" border="0" cellpadding="1" width="80%">
 <tr>
     <td>公司</td>

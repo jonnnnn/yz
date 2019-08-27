@@ -3,12 +3,16 @@ package com.lz.action;
 import com.lz.entity.User;
 import com.lz.entity.Yz;
 import com.lz.services.YzListServices;
+import com.lz.tool.R;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -26,18 +30,29 @@ public class YzListAction {
     private YzListServices yzListServices;
 
     @RequestMapping("goYzList")
-    public String goYzList(ModelMap map, HttpServletRequest request){
-        User user = (User)request.getSession().getAttribute("user1");
+    @ResponseBody
+    public R goYzList(HttpServletRequest request, HttpServletResponse response) {
+        // User user = (User)request.getSession().getAttribute("user1");
+        User user = new User();
+        user.setStaffid("ZIY00079651");
         List<Yz> yz = yzListServices.getByOpid(user.getStaffid());
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        return R.data("", yz);
+    }
+
+    /*@RequestMapping("goYz")
+    public String goYz(ModelMap map, HttpServletRequest request){
+
+        List<Yz> yz = yzListServices.getByOpid();
         if(yz != null){
             map.put("yz",yz);
             return "yz";
         }
         return "null";
-    }
+    }*/
 
     @RequestMapping("detYz")
-    public String detYz(ModelMap map,Yz yz){
+    public String detYz(Yz yz) {
         Yz yz1 = yzListServices.getByPk(yz.getPk());
         try {
             File f = new File("C:/tomcate");
