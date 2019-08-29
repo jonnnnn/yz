@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by z on 2018/8/13.
@@ -23,4 +24,11 @@ public class FpServicesImpl implements FpServices {
     public List<Fp> getFp(Fp fp) {
         return fpMapper.getFp(fp);
     }
+
+    @Override
+    public void delFp(Map map) {
+        fpMapper.delFp(map);
+    }
+
+
 }

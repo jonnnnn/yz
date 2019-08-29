@@ -32,27 +32,16 @@ public class YzListAction {
     @RequestMapping("goYzList")
     @ResponseBody
     public R goYzList(HttpServletRequest request, HttpServletResponse response) {
-        // User user = (User)request.getSession().getAttribute("user1");
-        User user = new User();
-        user.setStaffid("ZIY00079651");
+        User user = (User) request.getSession().getAttribute("user");
+        //user.setStaffid("ZIY00079651");
         List<Yz> yz = yzListServices.getByOpid(user.getStaffid());
         response.setHeader("Access-Control-Allow-Origin", "*");
         return R.data("", yz);
     }
 
-    /*@RequestMapping("goYz")
-    public String goYz(ModelMap map, HttpServletRequest request){
-
-        List<Yz> yz = yzListServices.getByOpid();
-        if(yz != null){
-            map.put("yz",yz);
-            return "yz";
-        }
-        return "null";
-    }*/
-
     @RequestMapping("detYz")
-    public String detYz(Yz yz) {
+    @ResponseBody
+    public R detYz(@RequestBody Yz yz) {
         Yz yz1 = yzListServices.getByPk(yz.getPk());
         try {
             File f = new File("C:/tomcate");
@@ -68,7 +57,7 @@ public class YzListAction {
             e.printStackTrace();
         }
         yzListServices.detYz(yz.getPk());
-        return "forward:/goYzList";
+        return R.data("删除成功!");
     }
 
 }

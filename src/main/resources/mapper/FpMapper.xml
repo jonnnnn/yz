@@ -18,4 +18,8 @@
           and a.billingdate > To_Date('2019-8-1', 'yyyy-mm-dd')
     </select>
 
+    <select id="delFp" statementType="CALLABLE">
+        call tyerp.tool_fpsqd(#{p_billid,mode = IN,jdbcType=VARCHAR})
+    </select>
+
 </mapper>

@@ -6,10 +6,15 @@
         <result column="billid" jdbcType="VARCHAR" property="billid"/>
     </resultMap>
 
-    <select id="getOp" parameterType="Fp" resultMap="BaseResultMap">
+    <select id="getOp" parameterType="Op" resultMap="BaseResultMap">
         select a.*, (select STAFFNAME from tb_sys_staff where staffid = a.opid) STAFFNAME
         from tb_sys_openbillflag a
         where opid = #{opid}
     </select>
+
+    <delete id="delOp" parameterType="Op">
+        delete tb_sys_openbillflag
+        where billid = #{billid}
+    </delete>
 
 </mapper>

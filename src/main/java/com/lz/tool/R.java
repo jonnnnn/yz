@@ -1,5 +1,6 @@
 package com.lz.tool;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 
@@ -32,7 +33,6 @@ public class R extends HashMap<String, Object> {
         r.put("data", data);
         return r;
     }
-
 }
 
 

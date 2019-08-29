@@ -10,4 +10,6 @@ import java.util.List;
  */
 public interface OpServices {
     public List<Op> getOp(Op op);
+
+    public void delOp(Op op);
 }

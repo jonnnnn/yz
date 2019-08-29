@@ -6,7 +6,16 @@ package com.lz.entity;
 public class User {
     private String userid;
     private String password;
+    private String username;
     private String staffid;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public String getStaffid() {
         return staffid;

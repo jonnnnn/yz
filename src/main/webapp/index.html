@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up Login</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+<link rel='stylesheet prefetch' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+<body>
+<div class="cotn_principal">
+    <div class="cont_centrar">
+        <div class="cont_login">
+            <div class="cont_info_log_sign_up">
+                <div class="col_md_login">
+                    <div class="cont_ba_opcitiy">
+                        <h2>LOGIN</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur.</p>
+                        <button class="btn_login" onclick="cambiar_login()">登录</button>
+                    </div>
+                </div>
+                <div class="col_md_sign_up">
+                    <div class="cont_ba_opcitiy">
+                        <h2>SIGN UP</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur.</p>
+                        <button class="btn_sign_up" onclick="cambiar_sign_up()">注册</button>
+                    </div>
+                </div>
+            </div>
+            <div class="cont_back_info">
+                <div class="cont_img_back_grey"><img src="po.jpg" alt=""/></div>
+            </div>
+            <div class="cont_forms">
+                <div class="cont_img_back_"><img src="po.jpg" alt=""/></div>
+                <div class="cont_form_login"><a href="#" onclick="ocultar_login_sign_up()"><i class="material-icons">&#xE5C4;</i></a>
+                    <h2>LOGIN</h2>
+                    <input type="text" id="userid" placeholder="账号"/>
+                    <input type="password" id="passwordid" placeholder="密码"/>
+                    <button class="btn_login" onclick="letgo()">登录</button>
+                </div>
+                <div class="cont_form_sign_up"><a href="#" onclick="ocultar_login_sign_up()"><i class="material-icons">&#xE5C4;</i></a>
+                    <h2>SIGN UP</h2>
+                    <input type="text" id="erpid" placeholder="ERP账号"/>
+                    <input type="text" id="usernameid" placeholder="姓名"/>
+                    <input type="password" id="pswdid" placeholder="密码"/>
+                    <input type="password" id="cofmpswdid" placeholder="确认密码"/>
+                    <button class="btn_sign_up" onclick="signup()">注册</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script>
+    /*登录*/
+    function letgo() {
+        var user = $('#userid').val();
+        var password = $('#passwordid').val();
+
+        $.ajax({
+            url: 'login',
+            type: 'post',
+            dataType: "json",
+            data: {'userid': user, 'password': password},
+            success: function (res) {
+                if (res.msg == "success") {
+                    setTimeout(function () {
+                        document.querySelector('.cont_form_sign_up').style.display = "none";
+                        location.href = "dist/index.html"
+                    }, 200);
+                } else if (res.msg == 'error') {
+                    alert("账号或密码错误!");
+                }
+            }, error: function () {
+                alert("网络错误!");
+            }
+        });
+    }
+
+    /*注册 */
+    function signup() {
+        var erp = $('#erpid').val().toUpperCase();
+        var pswd = $('#pswdid').val();
+        var cofmpswd = $('#cofmpswdid').val();
+        var username = $('#usernameid').val();
+        if (erp == null || erp.trim() == "" || pswd == null || pswd.trim() == "") {
+            alert("请输入账号和密码!");
+            return;
+        }
+        if (pswd != cofmpswd) {
+            alert("两次输入的密码不一样!");
+            return;
+        }
+        $.ajax({
+            url: 'signup',
+            type: 'post',
+            dataType: "json",
+            data: {'userid': erp, 'password': cofmpswd, 'username': username},
+            success: function (res) {
+                if (res.msg == "success") {
+                    setTimeout(function () {
+                        document.querySelector('.cont_form_sign_up').style.display = "none";
+                        alert("注册成功~");
+                        location.href = "dist/index.html"
+                    }, 1500);
+                } else {
+                    alert(res.msg);
+                }
+            }, error: function () {
+                alert("网络错误!");
+            }
+        });
+    }
+
+    function cambiar_login() {
+        document.querySelector('.cont_forms').className = "cont_forms cont_forms_active_login";
+        document.querySelector('.cont_form_login').style.display = "block";
+        document.querySelector('.cont_form_sign_up').style.opacity = "0";
+        setTimeout(function () {
+            document.querySelector('.cont_form_login').style.opacity = "1";
+        }, 400);
+        setTimeout(function () {
+            document.querySelector('.cont_form_sign_up').style.display = "none";
+        }, 200);
+    }
+
+    function cambiar_sign_up(at) {
+        document.querySelector('.cont_forms').className = "cont_forms cont_forms_active_sign_up";
+        document.querySelector('.cont_form_sign_up').style.display = "block";
+        document.querySelector('.cont_form_login').style.opacity = "0";
+
+        setTimeout(function () {
+            document.querySelector('.cont_form_sign_up').style.opacity = "1";
+        }, 100);
+
+        setTimeout(function () {
+            document.querySelector('.cont_form_login').style.display = "none";
+        }, 400);
+
+    }
+
+    function ocultar_login_sign_up() {
+
+        document.querySelector('.cont_forms').className = "cont_forms";
+        document.querySelector('.cont_form_sign_up').style.opacity = "0";
+        document.querySelector('.cont_form_login').style.opacity = "0";
+
+        setTimeout(function () {
+            document.querySelector('.cont_form_sign_up').style.display = "none";
+            document.querySelector('.cont_form_login').style.display = "none";
+        }, 500);
+
+    }
+</script>
+</body>
+
+</body>
+</html>

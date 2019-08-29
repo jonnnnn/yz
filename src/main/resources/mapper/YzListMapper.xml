@@ -71,7 +71,8 @@
   </select>
 
 <delete id="detYz" parameterType="Long">
-	delete TB_GOS_STOCK_STOCKPREEMPTION where pk = #{pk}
+    delete TB_GOS_STOCK_STOCKPREEMPTION
+    where pk = #{pk}
 </delete>
 
 </mapper>

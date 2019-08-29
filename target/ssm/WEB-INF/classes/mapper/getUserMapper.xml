@@ -7,8 +7,35 @@
     <result column="ZIYID" jdbcType="VARCHAR" property="staffid" />
   </resultMap>
 
-  <select id="getUser" parameterType="String" resultMap="BaseResultMap">
-      select USERID,PASSWORD,ZIYID from sx_tool_loginyz a where USERID = #{userid}
+  <select id="getUser" parameterType="User" resultMap="BaseResultMap">
+    select *
+    from sx_tool_loginyz a
+    where USERID = #{userid}
+      and password = #{password}
   </select>
+
+  <select id="checkUser" parameterType="User" resultMap="BaseResultMap">
+    select *
+    from sx_tool_loginyz a
+    where USERID = #{userid}
+  </select>
+
+  <select id="getStaffid" parameterType="User" resultMap="BaseResultMap">
+    select STAFFID
+    from tyerp.tb_sys_user a
+    where USERID = #{userid}
+      and DELETEFLAG = 0
+  </select>
+
+  <update id="updUser" parameterType="User">
+    update SX_TOOL_LOGINYZ
+    set PASSWORD = #{password}
+    where ZIYID = #{staffid}
+  </update>
+
+  <insert id="insUser" parameterType="User">
+    insert into SX_TOOL_LOGINYZ
+    values (#{staffid}, #{username}, '', #{userid}, #{password})
+  </insert>
 
 </mapper>

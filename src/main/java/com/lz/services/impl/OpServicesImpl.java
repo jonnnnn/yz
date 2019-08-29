@@ -23,4 +23,9 @@ public class OpServicesImpl implements OpServices {
     public List<Op> getOp(Op op) {
         return opMapper.getOp(op);
     }
+
+    @Override
+    public void delOp(Op op) {
+        opMapper.delOp(op);
+    }
 }

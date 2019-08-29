@@ -2,12 +2,15 @@ package com.lz.action;
 
 import com.lz.entity.User;
 import com.lz.services.LoginServices;
+import com.lz.tool.R;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * Created by z on 2018/8/13.
@@ -18,20 +21,48 @@ public class LoginAction {
 private LoginServices loginServices;
 
     @RequestMapping("login")
-    public String login(ModelMap map, User user, HttpServletRequest request){
-       User user1 = loginServices.getUser(user.getUserid().toUpperCase());
-        if(user1 != null){
-            if(user1.getUserid().equals(user.getUserid().trim().toUpperCase()) && user1.getPassword().equals(user.getPassword().trim())){
-                request.getSession().setAttribute("user1",user1);
-                return "forward:/goYzList";
-            }
+    @ResponseBody
+    public R login(User user, HttpServletRequest request) {
+        List<User> list = loginServices.getUser(user);
+        if (list.size() > 0) {
+            request.getSession().setAttribute("user", list.get(0));
+            return R.data("success");
         }
-        return "error";
+        return R.data("error");
     }
 
+    @RequestMapping("signup")
+    @ResponseBody
+    public R signup(User user, HttpServletRequest request) {
+        List<User> list = loginServices.getStaffid(user);
+        List<User> checkUser = loginServices.checkUser(user);
+        if (list.size() < 1) {
+            return R.data("注册失败!未找到ERP账号！");
+        }
+        if (checkUser.size() > 0) {
+            return R.data("用户已注册！");
+        }
+        user.setStaffid(list.get(0).getStaffid());
+        loginServices.insUser(user);
+        request.getSession().setAttribute("user", list.get(0));
+        return R.data("success");
+    }
+
+    @RequestMapping("updUser")
+    @ResponseBody
+    public R updUser(User user, HttpServletRequest request) {
+        User user1 = (User) request.getSession().getAttribute("user");
+        user.setStaffid(user1.getStaffid());
+
+        loginServices.updUser(user);
+        return R.data("success");
+    }
+
+
     @RequestMapping("loginOut")
-    public String loginOut(HttpServletRequest request){
-        request.getSession().removeAttribute("user1");
-        return "login";
+    @ResponseBody
+    public R loginOut(HttpServletRequest request) {
+        request.getSession().removeAttribute("user");
+        return R.data("success");
     }
 }
