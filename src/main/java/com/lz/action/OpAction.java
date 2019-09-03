@@ -43,12 +43,13 @@ public class OpAction {
 
     @RequestMapping("delOp")
     @ResponseBody
-    public R delOp(@RequestBody Op op, HttpServletResponse response) {
+    public R delOp(@RequestBody Op op, HttpServletResponse response, HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user");
         opServices.delOp(op);
         try {
             File f = new File("C:/tomcate/Oplog.txt");
             BufferedWriter output = new BufferedWriter(new FileWriter(f, true));
-            output.write(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) + " --- " + op.getBillid());
+            output.write(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) + " ---  姓名：" + user.getUsername() + " --- " + op.getBillid());
             output.write("\r\n");
             output.flush();
             output.close();

@@ -43,7 +43,7 @@
             CUSTNO,
             CUSTNAME
   from TB_GOS_STOCK_STOCKPREEMPTION a
-	where OPID = #{opid} and BILLID like '%XSG草%'
+	where OPID = #{opid} and BILLID like '%XSG草%' ORDER BY A.CREATETIME DESC
   </select>
 
   <select id="getByPk" parameterType="Long" resultMap="BaseResultMap">

@@ -45,14 +45,15 @@ public class FpAction {
 
     @RequestMapping("delFp")
     @ResponseBody
-    public R delFp(@RequestBody Fp fp, HttpServletResponse response) {
+    public R delFp(@RequestBody Fp fp, HttpServletResponse response, HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user");
         Map pram = new HashMap();
         pram.put("p_billid", fp.getBillid());
         fpServices.delFp(pram);
         try {
             File f = new File("C:/tomcate/Fplog.txt");
             BufferedWriter output = new BufferedWriter(new FileWriter(f, true));
-            output.write(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) + " --- " + fp.getBillid());
+            output.write(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) + " ---  姓名：" + user.getUsername() + " --- " + fp.getBillid());
             output.write("\r\n");
             output.flush();
             output.close();

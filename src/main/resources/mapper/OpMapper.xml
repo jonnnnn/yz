@@ -10,6 +10,7 @@
         select a.*, (select STAFFNAME from tb_sys_staff where staffid = a.opid) STAFFNAME
         from tb_sys_openbillflag a
         where opid = #{opid}
+        ORDER BY A.CREATETIME DESC
     </select>
 
     <delete id="delOp" parameterType="Op">
