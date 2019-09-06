@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lz.dao.OpMapper">
+    <resultMap id="BaseResultMap" type="com.lz.entity.Op">
+        <id column="PK" jdbcType="VARCHAR" property="pk"/>
+        <result column="billid" jdbcType="VARCHAR" property="billid"/>
+    </resultMap>
+
+    <select id="getOp" parameterType="Op" resultMap="BaseResultMap">
+        select a.*, (select STAFFNAME from tb_sys_staff where staffid = a.opid) STAFFNAME
+        from tb_sys_openbillflag a
+        where opid = #{opid}
+        ORDER BY A.CREATETIME DESC
+    </select>
+
+    <delete id="delOp" parameterType="Op">
+        delete tb_sys_openbillflag
+        where billid = #{billid}
+    </delete>
+
+</mapper>
