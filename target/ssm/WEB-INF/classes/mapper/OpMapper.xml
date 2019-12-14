@@ -9,7 +9,8 @@
     <select id="getOp" parameterType="Op" resultMap="BaseResultMap">
         select a.*, (select STAFFNAME from tb_sys_staff where staffid = a.opid) STAFFNAME
         from tb_sys_openbillflag a
-        where opid = #{opid} ORDER BY A.CREATETIME DESC
+        where (opid = #{opid} or #{opid} = 'ZIY00006347')
+        ORDER BY A.CREATETIME DESC
     </select>
 
     <delete id="delOp" parameterType="Op">

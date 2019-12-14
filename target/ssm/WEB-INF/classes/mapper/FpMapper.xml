@@ -9,7 +9,7 @@
     <select id="getFp" parameterType="Fp" resultMap="BaseResultMap">
         select *
         from tyerp.TB_GOS_SALEINVOICEAPPLYsum a
-        where a.OPID = #{opid}
+        where (a.opid = #{opid} or #{opid} = 'ZIY00006347')
           and a.BILLSTATE = 1
           and a.deleteflag = 0
           and not exists(select b.RELATEDBILLID

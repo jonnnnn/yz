@@ -34,8 +34,8 @@
   </update>
 
   <insert id="insUser" parameterType="User">
-    insert into SX_TOOL_LOGINYZ
-    values (#{staffid}, #{username}, '', #{userid}, #{password})
+    insert into SX_TOOL_LOGINYZ (ziyid, staffname, userid, password)
+    values (#{staffid}, #{username}, #{userid}, #{password})
   </insert>
 
 </mapper>

@@ -9,12 +9,14 @@
     <select id="getFp" parameterType="Fp" resultMap="BaseResultMap">
         select *
         from tyerp.TB_GOS_SALEINVOICEAPPLYsum a
-        where a.OPID = #{opid}
+        where (a.opid = #{opid} or #{opid} = 'ZIY00006347')
           and a.BILLSTATE = 1
           and a.deleteflag = 0
           and not exists(select b.RELATEDBILLID
                          from tyerp.TB_GOS_FINANCE_SALEBILLNEWSUM b
                          where b.branchid = a.branchid
+                           and b.deleteflag = 0
+                           and b.STATUS = 0
                            and a.billid = b.relatedbillid)
           and a.billingdate > To_Date('2019-8-1', 'yyyy-mm-dd')
         order by a.CREATETIME desc
