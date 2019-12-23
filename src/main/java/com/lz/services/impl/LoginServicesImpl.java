@@ -39,4 +39,9 @@ public class LoginServicesImpl implements LoginServices {
     public void updUser(User user) {
         loginMapper.updUser(user);
     }
+
+    @Override
+    public User getUserByPass(User user) {
+        return loginMapper.getUserByPass(user);
+    }
 }

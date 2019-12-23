@@ -12,12 +12,14 @@
     from sx_tool_loginyz a
     where USERID = #{userid}
       and password = #{password}
+      and DELETEFLAG = 0
   </select>
 
   <select id="checkUser" parameterType="User" resultMap="BaseResultMap">
     select *
     from sx_tool_loginyz a
     where USERID = #{userid}
+      and DELETEFLAG = 0
   </select>
 
   <select id="getStaffid" parameterType="User" resultMap="BaseResultMap">
@@ -31,7 +33,15 @@
     update SX_TOOL_LOGINYZ
     set PASSWORD = #{password}
     where ZIYID = #{staffid}
+      and DELETEFLAG = 0
   </update>
+
+  <select id="getUserByPass" parameterType="User" resultType="User">
+    select *
+    from SX_TOOL_LOGINYZ
+    where userid = #{userid}
+      and password = #{password}
+  </select>
 
   <insert id="insUser" parameterType="User">
     insert into SX_TOOL_LOGINYZ (ziyid, staffname, userid, password)

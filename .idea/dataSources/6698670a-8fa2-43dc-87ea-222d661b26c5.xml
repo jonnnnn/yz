@@ -6,9 +6,9 @@
     </root>
     <schema id="2" parent="1" name="WEB_TOOL">
       <ObjectId>96</ObjectId>
-      <IntrospectionTimestamp>2019-08-28.08:38:04</IntrospectionTimestamp>
+      <IntrospectionTimestamp>2019-12-23.00:20:19</IntrospectionTimestamp>
       <CreatedTimestamp>2019-05-16.22:26:02</CreatedTimestamp>
-      <ModifiedTimestamp>2019-05-17.08:14:03</ModifiedTimestamp>
+      <ModifiedTimestamp>2019-10-21.08:14:53</ModifiedTimestamp>
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
@@ -132,15 +132,21 @@
     <schema id="42" parent="1" name="FANLI">
       <ObjectId>93</ObjectId>
     </schema>
-    <schema id="43" parent="1" name="WDGERP">
-      <ObjectId>95</ObjectId>
-    </schema>
-    <schema id="44" parent="1" name="SXVIEWER">
-      <ObjectId>97</ObjectId>
-    </schema>
-    <schema id="45" parent="1" name="XS$NULL">
+    <schema id="43" parent="1" name="XS$NULL">
       <ObjectId>2147483638</ObjectId>
     </schema>
+    <sequence id="44" parent="2" name="SX_TOOL_IMPSIGN_PK">
+      <ObjectId>291444</ObjectId>
+      <CreatedTimestamp>2019-10-20.10:59:59</CreatedTimestamp>
+      <ModifiedTimestamp>2019-10-20.10:59:59</ModifiedTimestamp>
+      <SequenceIdentity>1..9999999999</SequenceIdentity>
+    </sequence>
+    <table id="45" parent="2" name="SX_TOOL_IMPSIGN">
+      <ObjectId>291432</ObjectId>
+      <CreatedTimestamp>2019-10-20.10:23:35</CreatedTimestamp>
+      <ModifiedTimestamp>2019-10-21.08:14:53</ModifiedTimestamp>
+      <TemporaryPreserve>1</TemporaryPreserve>
+    </table>
     <synonym id="46" parent="2" name="SX_KCSXXLOGIN">
       <ObjectId>256202</ObjectId>
       <CreatedTimestamp>2019-05-16.22:26:09</CreatedTimestamp>
@@ -151,7 +157,7 @@
     <synonym id="47" parent="2" name="SX_KCSXX_PRO">
       <ObjectId>256207</ObjectId>
       <CreatedTimestamp>2019-05-16.22:26:11</CreatedTimestamp>
-      <ModifiedTimestamp>2019-05-16.22:26:11</ModifiedTimestamp>
+      <ModifiedTimestamp>2019-10-19.01:11:48</ModifiedTimestamp>
       <TargetSchemaName>TYERP</TargetSchemaName>
       <TargetObjectName>SX_KCSXX_PRO</TargetObjectName>
     </synonym>
@@ -218,5 +224,41 @@
       <TargetSchemaName>TYERP</TargetSchemaName>
       <TargetObjectName>VW_COMMON_PROD</TargetObjectName>
     </synonym>
+    <column id="57" parent="45" name="NAME">
+      <Position>1</Position>
+      <DataType>VARCHAR2(200 byte)|0s</DataType>
+    </column>
+    <column id="58" parent="45" name="DEPT">
+      <Position>2</Position>
+      <DataType>VARCHAR2(100 byte)|0s</DataType>
+    </column>
+    <column id="59" parent="45" name="TDATE">
+      <Position>3</Position>
+      <DataType>VARCHAR2(50 byte)|0s</DataType>
+    </column>
+    <column id="60" parent="45" name="TTIME">
+      <Position>4</Position>
+      <DataType>VARCHAR2(50 byte)|0s</DataType>
+    </column>
+    <column id="61" parent="45" name="PK">
+      <Position>5</Position>
+      <DataType>NUMBER(*)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="62" parent="45" name="SX_TOOL_IMPSIGN_PK">
+      <ObjectId>291443</ObjectId>
+      <CreatedTimestamp>2019-10-20.10:59:12</CreatedTimestamp>
+      <ModifiedTimestamp>2019-10-20.10:59:12</ModifiedTimestamp>
+      <TablespaceName>CENTER</TablespaceName>
+      <ColNames>PK</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="63" parent="45" name="SX_TOOL_IMPSIGN_PK">
+      <ModifiedTimestamp>2019-10-20.10:59:12</ModifiedTimestamp>
+      <ColNames>PK</ColNames>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <UnderlyingIndexName>SX_TOOL_IMPSIGN_PK</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
   </database-model>
 </dataSource>

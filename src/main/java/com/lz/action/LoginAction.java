@@ -5,11 +5,14 @@ import com.lz.services.LoginServices;
 import com.lz.tool.R;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -50,14 +53,26 @@ private LoginServices loginServices;
 
     @RequestMapping("updUser")
     @ResponseBody
-    public R updUser(User user, HttpServletRequest request) {
+    public R updUser(@RequestBody User user, HttpServletRequest request) {
         User user1 = (User) request.getSession().getAttribute("user");
-        user.setStaffid(user1.getStaffid());
-
+        //user.setStaffid(user1.getStaffid());
+        user.setStaffid("ZIY00006347");
         loginServices.updUser(user);
         return R.data("success");
     }
 
+    @RequestMapping("getUserByPass")
+    @ResponseBody
+    public R getUserByPass(User user, HttpServletRequest request) {
+        User user1 = (User) request.getSession().getAttribute("user");
+        /*user.setUserid(user1.getUserid());*/
+        user.setUserid("SXADMIN");
+        User user2 = loginServices.getUserByPass(user);
+        if (user2 != null) {
+            return R.data("success");
+        }
+        return R.data("error");
+    }
 
     @RequestMapping("loginOut")
     @ResponseBody

@@ -31,11 +31,9 @@ public class YzListAction {
 
     @RequestMapping("goYzList")
     @ResponseBody
-    public R goYzList(HttpServletRequest request, HttpServletResponse response) {
+    public R goYzList(HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
-        //user.setStaffid("ZIY00079651");
         List<Yz> yz = yzListServices.getByOpid(user.getStaffid());
-        response.setHeader("Access-Control-Allow-Origin", "*");
         return R.data("", yz);
     }
 

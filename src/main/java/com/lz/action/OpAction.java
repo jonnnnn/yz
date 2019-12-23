@@ -32,18 +32,16 @@ public class OpAction {
 
     @RequestMapping("getOp")
     @ResponseBody
-    public R getOp(Op op, HttpServletResponse response, HttpServletRequest request) {
+    public R getOp(Op op, HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
-        //user.setStaffid("ZIY00026164");
         op.setOpid(user.getStaffid());
         List<Op> opList = opServices.getOp(op);
-        response.setHeader("Access-Control-Allow-Origin", "*");
         return R.data("", opList);
     }
 
     @RequestMapping("delOp")
     @ResponseBody
-    public R delOp(@RequestBody Op op, HttpServletResponse response, HttpServletRequest request) {
+    public R delOp(@RequestBody Op op, HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
         opServices.delOp(op);
         try {
@@ -56,7 +54,6 @@ public class OpAction {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        response.setHeader("Access-Control-Allow-Origin", "*");
         return R.data("删除成功!");
     }
 }

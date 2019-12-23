@@ -34,18 +34,16 @@ public class FpAction {
 
     @RequestMapping("getFp")
     @ResponseBody
-    public R getFp(Fp fp, HttpServletResponse response, HttpServletRequest request) {
+    public R getFp(Fp fp, HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
-        //user.setStaffid("ZIY00052384");
         fp.setOpid(user.getStaffid());
         List<Fp> fpList = fpServices.getFp(fp);
-        response.setHeader("Access-Control-Allow-Origin", "*");
         return R.data("", fpList);
     }
 
     @RequestMapping("delFp")
     @ResponseBody
-    public R delFp(@RequestBody Fp fp, HttpServletResponse response, HttpServletRequest request) {
+    public R delFp(@RequestBody Fp fp, HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
         Map pram = new HashMap();
         pram.put("p_billid", fp.getBillid());
